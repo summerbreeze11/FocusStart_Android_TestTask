@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">study</string>
+    <string name="network">SCHEME / NETWORK</string>
+    <string name="type">TYPE</string>
+    <string name="bank">BANK</string>
+    <string name="brand">BRAND</string>
+    <string name="prepaid">PREPAID</string>
+    <string name="card_number">CARD NUMBER</string>
+    <string name="country">COUNTRY</string>
+    <string name="get_info">GET INFORMATION</string>
+    <string name="empty_field_error">Enter card number</string>
+</resources>
