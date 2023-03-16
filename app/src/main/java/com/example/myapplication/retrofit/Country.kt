@@ -7,5 +7,5 @@ data class Country(
     val latitude: Int,
     val longitude: Int,
     val name: String,
-    val numeric: String
+    val numeric: String,
 )

@@ -4,9 +4,8 @@ import android.R
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.ArrayAdapter
-import android.widget.Toast
-import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.databinding.ActivityMainBinding
 import com.example.myapplication.retrofit.*
 import kotlinx.coroutines.CoroutineScope
@@ -14,29 +13,32 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.*
 
+//TODO ВРЕМЯ ОБЩЕЕ НА ВСЕХ ЗАПИСЯХ НАДО ПОФИКСТЬ + ДОБАВИТЬ ВСЕ СТРОКИ В СПИСОК
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
+    private val adapter = CardAdapter()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        var a = ArrayList<String>()
-        var listcounter = 1
         val retrofit = Retrofit.Builder().baseUrl("https://lookup.binlist.net/")
             .addConverterFactory(GsonConverterFactory.create()).build()
         val commoninfapi = retrofit.create(CommonInfapi::class.java)
         val cardnumber = binding.edFieldInfo.text
         binding.bGetInfo.setOnClickListener {
-            val adapter = ArrayAdapter(this, R.layout.simple_list_item_1, a)
-            binding.listView.adapter = adapter
-            binding.listView.setOnItemClickListener { adapterView, view, i, l ->
-            }
             CoroutineScope(Dispatchers.IO).launch {
                 try {
                     var common = commoninfapi.getCommon("$cardnumber")
                     runOnUiThread {
+                        ///////
+                        var manager = LinearLayoutManager(this@MainActivity)
+                        binding.rcView.layoutManager = LinearLayoutManager(this@MainActivity)
+                        binding.rcView.adapter = adapter
+                        common.date = Date().toString()
+                        /////////
                         try {
                             binding.tvLength.text = common.number.length
                         } catch (e: java.lang.NullPointerException) {
@@ -89,8 +91,8 @@ class MainActivity : AppCompatActivity() {
                         } catch (e: java.lang.NullPointerException) {
                             binding.edFieldInfo.error = "Invalid data"
                         }
-                        a.add(" $listcounter - code$cardnumber ${common.toString()}")
-                        listcounter++
+                        adapter.addCardRecord(common)
+                        Log.d("Log", "$common")
                     }
                 } catch (e: retrofit2.HttpException) {
                     runOnUiThread {
@@ -103,7 +105,14 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-
-
     }
+//    private fun init(){
+//        binding.apply {
+//            rcView.layoutManager = LinearLayoutManager(this@MainActivity)
+//            rcView.adapter = adapter
+//            bGetInfo.setOnClickListener{
+//                adapter.addCardRecord()
+//            }
+//        }
+//    }
 }
