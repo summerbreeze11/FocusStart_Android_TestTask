@@ -1,17 +1,31 @@
 package com.example.myapplication
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.databinding.ActivityMainBinding
 import com.example.myapplication.databinding.CardItemBinding
 import com.example.myapplication.retrofit.Card
+import java.io.BufferedReader
+import java.io.File
+import java.io.FileInputStream
+import java.io.InputStreamReader
 import java.util.*
 import kotlin.collections.ArrayList
 
 
+
+
 class CardAdapter: RecyclerView.Adapter<CardAdapter.CardHolder>() {
+    val file = File("/data/user/0/com.example.myapplication/files", "CardHistory.txt")
+    val data = FileInputStream(file).use {
+        String(it.readBytes())
+    }
     val cardList = ArrayList<Card>()
     class CardHolder(item: View): RecyclerView.ViewHolder(item) {
         val binding = CardItemBinding.bind(item)
@@ -59,9 +73,6 @@ class CardAdapter: RecyclerView.Adapter<CardAdapter.CardHolder>() {
         cardList.add(card)
         notifyDataSetChanged()
     }
-
-
-
 
 
 }

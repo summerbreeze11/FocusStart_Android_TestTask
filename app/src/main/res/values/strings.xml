@@ -7,6 +7,13 @@
     <string name="prepaid">PREPAID</string>
     <string name="card_number">CARD NUMBER</string>
     <string name="country">COUNTRY</string>
+    <string name="latitude">latitude</string>
+    <string name="longitude">longitude</string>
+    <string name="length">length</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
     <string name="get_info">GET INFORMATION</string>
     <string name="empty_field_error">Enter card number</string>
+    <string name="main_menu_name">BIN search</string>
+    <string name="input_error">Invalid data</string>
 </resources>
