@@ -42,11 +42,6 @@ class HistoryActivity : AppCompatActivity() {
     }
 
     private fun cleanHistory() {
-
-        val textFromFile =
-            File(applicationContext.filesDir, constants.FILE_NAME)
-                .bufferedReader()
-                .use { it.readText(); }
         val fos = openFileOutput(constants.FILE_NAME, Context.MODE_PRIVATE)
         var clear = ""
         fos.write(clear.toByteArray())

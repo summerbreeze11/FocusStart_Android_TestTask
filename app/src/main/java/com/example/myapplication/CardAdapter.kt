@@ -22,10 +22,6 @@ import kotlin.collections.ArrayList
 
 
 class CardAdapter: RecyclerView.Adapter<CardAdapter.CardHolder>() {
-    val file = File("/data/user/0/com.example.myapplication/files", "CardHistory.txt")
-    val data = FileInputStream(file).use {
-        String(it.readBytes())
-    }
     val cardList = ArrayList<Card>()
     class CardHolder(item: View): RecyclerView.ViewHolder(item) {
         val binding = CardItemBinding.bind(item)

@@ -32,6 +32,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = constants.main_menu_title
+        atFirstStart()
         getInfo()
     }
 
@@ -175,6 +176,14 @@ class MainActivity : AppCompatActivity() {
             String(it.readBytes())
         }
         return data
+    }
+
+    private fun atFirstStart() {
+        val file = File(applicationContext.filesDir, constants.FILE_NAME)
+        try {
+            file.createNewFile()
+        } catch (e: IOException) {
+        }
     }
 
 }

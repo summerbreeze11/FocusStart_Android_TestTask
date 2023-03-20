@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">study</string>
+    <string name="app_name">BIN search</string>
     <string name="network">SCHEME / NETWORK</string>
     <string name="type">TYPE</string>
     <string name="bank">BANK</string>
